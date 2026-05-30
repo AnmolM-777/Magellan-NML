@@ -1,2 +1,4 @@
 # Magellan-NML
-Project mapping robotic perception to nanomagnetic logic.
+
+### Project Overview
+Research proposal at INTRINSIC Lab, IIT Delhi under Prof. Santhosh Sivasubramani.
