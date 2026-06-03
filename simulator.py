@@ -13,4 +13,11 @@ class MQCAModel:
         }
 
     def get_multiplier_specs(self, bit_width):
-        pass
+        magnet_count = 30 * (bit_width ** 2)
+        gate_count = 3 * (bit_width ** 2)
+        latency_cycles = 1.5 * bit_width
+        return {
+            'magnets': magnet_count,
+            'gates': gate_count,
+            'latency_cycles': latency_cycles
+        }
