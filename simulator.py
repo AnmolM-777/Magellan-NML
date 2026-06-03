@@ -11,3 +11,6 @@ class MQCAModel:
             'gates': gate_count,
             'latency_cycles': latency_cycles
         }
+
+    def get_multiplier_specs(self, bit_width):
+        pass
