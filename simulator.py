@@ -27,10 +27,13 @@ class MQCAModel:
         acc_bit_width = 2 * bit_width + 4
         add_specs = self.get_adder_specs(acc_bit_width)
         total_magnets = mult_specs['magnets'] + add_specs['magnets']
-        # BUG: Forgot the switching activity factor (0.5)
         energy_aJ = total_magnets * self.energy_per_magnet_switch_aJ
         return {
             'magnets': total_magnets,
             'energy_aJ': energy_aJ,
             'energy_J': energy_aJ * 1e-18
         }
+
+class CMOSModel:
+    def __init__(self, process_node_nm=28):
+        self.process_node_nm = process_node_nm
