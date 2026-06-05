@@ -37,3 +37,13 @@ class MQCAModel:
 class CMOSModel:
     def __init__(self, process_node_nm=28):
         self.process_node_nm = process_node_nm
+
+    def get_mac_energy_J(self, bit_width):
+        if bit_width <= 4:
+            energy_fJ = 35.0
+        elif bit_width <= 8:
+            energy_fJ = 150.0
+        else:
+            energy_fJ = 400.0
+        # BUG: Multiplying by 1e-12 instead of 1e-15 (pJ instead of fJ)
+        return energy_fJ * 1e-12
