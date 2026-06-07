@@ -45,5 +45,4 @@ class CMOSModel:
             energy_fJ = 150.0
         else:
             energy_fJ = 400.0
-        # BUG: Multiplying by 1e-12 instead of 1e-15 (pJ instead of fJ)
-        return energy_fJ * 1e-12
+        return energy_fJ * 1e-15
