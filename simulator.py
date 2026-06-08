@@ -1,6 +1,7 @@
 class MQCAModel:
-    def __init__(self, energy_per_magnet_switch_aJ=2.0):
+    def __init__(self, energy_per_magnet_switch_aJ=2.0, switching_activity=0.5):
         self.energy_per_magnet_switch_aJ = energy_per_magnet_switch_aJ
+        self.switching_activity = switching_activity
 
     def get_adder_specs(self, bit_width):
         magnet_count = 35 * bit_width
@@ -27,7 +28,7 @@ class MQCAModel:
         acc_bit_width = 2 * bit_width + 4
         add_specs = self.get_adder_specs(acc_bit_width)
         total_magnets = mult_specs['magnets'] + add_specs['magnets']
-        energy_aJ = total_magnets * self.energy_per_magnet_switch_aJ
+        energy_aJ = total_magnets * self.switching_activity * self.energy_per_magnet_switch_aJ
         return {
             'magnets': total_magnets,
             'energy_aJ': energy_aJ,
