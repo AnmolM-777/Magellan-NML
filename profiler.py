@@ -1,3 +1,3 @@
 class WorkloadProfiler:
     def __init__(self):
-        pass
+        self.models = ['MiDaS', 'YOLOv8-nano']
