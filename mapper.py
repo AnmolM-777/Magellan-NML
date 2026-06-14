@@ -5,3 +5,6 @@ class WorkloadMapper:
         self.mqca = MQCAModel()
         self.cmos = CMOSModel()
         self.array_size = array_size
+
+    def map_layer(self, macs):
+        return macs * 1e-15
