@@ -11,8 +11,12 @@ class WorkloadProfiler:
         results = []
         for p in profile:
             bytes_factor = bit_width / 8.0
-            # Simple estimation
-            mem = p['weights_count'] * bytes_factor
+            # Multiply activations dimensions
+            act_in = 1
+            for x in p['input_shape']: act_in *= x
+            act_out = 1
+            for x in p['output_shape']: act_out *= x
+            mem = (p['weights_count'] + act_in + act_out) * bytes_factor
             results.append({
                 'layer_id': p['layer_id'],
                 'model': p['model'],
