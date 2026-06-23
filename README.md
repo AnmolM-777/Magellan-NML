@@ -1,3 +1,5 @@
 # Magellan-NML
 
-<!-- dev checkpoint 5 -->
+### Mathematical Formulation
+Multiplier scaling equations:
+$$M(N) = 30 * N^2$$
