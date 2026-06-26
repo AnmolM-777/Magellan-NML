@@ -1,5 +1,6 @@
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-# This crashes when running in CI without DISPLAY
 
 class RooflineAnalyzer:
     def __init__(self, memory_bandwidth_GBs=51.2):
