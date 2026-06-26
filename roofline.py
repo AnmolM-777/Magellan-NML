@@ -18,6 +18,8 @@ class RooflineAnalyzer:
         intensities = np.logspace(-2, 2, 100)
         ceil_gmacs = ceiling_ops / 1e9
         plt.loglog(intensities, np.minimum(ceil_gmacs, intensities * (self.bandwidth_Bs / 1e9)))
+        for r in results:
+            plt.scatter(r['arithmetic_intensity'], 50.0) # Dummy performance value
         plt.title('Roofline Model')
         plt.savefig('roofline.png')
         plt.close()
