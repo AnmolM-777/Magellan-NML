@@ -13,11 +13,11 @@ class RooflineAnalyzer:
             return 'Memory-Bound'
         return 'Compute-Bound'
 
-    def generate_plots(self, results):
+    def generate_plots(self, results, ceiling_ops=102.4e9):
         plt.figure()
         intensities = np.logspace(-2, 2, 100)
-        # Plot bandwidth bound
-        plt.loglog(intensities, intensities * (self.bandwidth_Bs / 1e9))
+        ceil_gmacs = ceiling_ops / 1e9
+        plt.loglog(intensities, np.minimum(ceil_gmacs, intensities * (self.bandwidth_Bs / 1e9)))
         plt.title('Roofline Model')
         plt.savefig('roofline.png')
         plt.close()
