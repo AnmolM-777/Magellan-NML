@@ -7,19 +7,10 @@ class RooflineAnalyzer:
     def __init__(self, memory_bandwidth_GBs=51.2):
         self.bandwidth_Bs = memory_bandwidth_GBs * 1e9
 
-    def classify(self, ai, ceiling_ops):
-        ridge = ceiling_ops / self.bandwidth_Bs
-        if ai < ridge:
-            return 'Memory-Bound'
-        return 'Compute-Bound'
-
-    def generate_plots(self, results, ceiling_ops=102.4e9):
+    def generate_energy_plot(self, results):
         plt.figure()
-        intensities = np.logspace(-2, 2, 100)
-        ceil_gmacs = ceiling_ops / 1e9
-        plt.loglog(intensities, np.minimum(ceil_gmacs, intensities * (self.bandwidth_Bs / 1e9)))
-        for r in results:
-            plt.scatter(r['arithmetic_intensity'], 50.0) # Dummy performance value
-        plt.title('Roofline Model')
-        plt.savefig('roofline.png')
+        nml = [x['nml_total_energy_J'] for x in results]
+        cmos = [x['cmos_total_energy_J'] for x in results]
+        plt.bar(range(len(nml)), nml)
+        plt.savefig('energy.png')
         plt.close()
