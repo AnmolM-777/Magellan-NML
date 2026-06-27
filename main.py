@@ -1,11 +1,12 @@
 from profiler import WorkloadProfiler
 from mapper import WorkloadMapper
+from roofline import RooflineAnalyzer
 
 if __name__ == '__main__':
     prof = WorkloadProfiler()
     mapper = WorkloadMapper()
+    analyzer = RooflineAnalyzer()
     layers = prof.run_profiler()
     mapped = mapper.map_workload(layers)
-    print('Layer ID | NML Energy (J) | CMOS Energy (J)')
-    for l in mapped:
-        print(f"{l['layer_id']} | {l['nml_total_energy_J']} | {l['cmos_total_energy_J']}")
+    analyzer.generate_energy_plot(mapped)
+    print('Plots generated.')
