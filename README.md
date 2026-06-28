@@ -1,5 +1,4 @@
 # Magellan-NML
 
-### Mathematical Formulation
-Multiplier scaling equations:
-$$M(N) = 30 * N^2$$
+### Running instructions
+`python3 main.py` to run the model.
