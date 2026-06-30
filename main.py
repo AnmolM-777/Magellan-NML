@@ -8,5 +8,5 @@ if __name__ == '__main__':
     analyzer = RooflineAnalyzer()
     layers = prof.run_profiler()
     mapped = mapper.map_workload(layers)
-    analyzer.generate_energy_plot(mapped)
-    print('Plots generated.')
+    table = analyzer.run_sensitivity(mapped, 102.4e9, 204.8e9)
+    print(table)
