@@ -1,2 +1,6 @@
+import pytest
 from roofline import RooflineAnalyzer
-# Direct float assertions might fail on certain architectures
+
+def test_classification():
+    analyzer = RooflineAnalyzer(memory_bandwidth_GBs=50.0)
+    assert analyzer.classify(1.0, 100e9) == 'Memory-Bound'
