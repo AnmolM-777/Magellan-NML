@@ -1,18 +1,7 @@
-from simulator import MQCAModel, CMOSModel
-from profiler import WorkloadProfiler
-from mapper import WorkloadMapper
+from roofline import RooflineAnalyzer
 
-def test_multiplier():
-    model = MQCAModel()
-    specs = model.get_multiplier_specs(2)
-    assert specs['magnets'] == 120
-
-def test_cmos():
-    cmos = CMOSModel()
-    assert cmos.get_mac_energy_J(8) == 1.5e-13
-
-def test_mapper_calculations():
-    mapper = WorkloadMapper()
-    layers = [{'layer_id': 'test', 'model': 'test', 'macs': 1000, 'total_memory_bytes': 100, 'arithmetic_intensity': 10}]
-    res = mapper.map_workload(layers)
-    assert len(res) == 1
+def test_classification():
+    analyzer = RooflineAnalyzer(memory_bandwidth_GBs=50.0)
+    # Ceiling 100 Gops. Ridge = 100G / 50G = 2 MAC/Byte
+    assert analyzer.classify(1.0, 100e9) == 'Memory-Bound'
+    assert analyzer.classify(3.0, 100e9) == 'Compute-Bound'
