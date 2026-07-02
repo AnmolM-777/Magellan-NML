@@ -1,6 +1,6 @@
 import pytest
-from simulator import CMOSModel
+from simulator import MQCAModel, CMOSModel
 
-def test_cmos_approx():
-    cmos = CMOSModel()
-    assert cmos.get_mac_energy_J(8) == pytest.approx(1.5e-13)
+def test_correctness():
+    mqca = MQCAModel()
+    assert mqca.get_adder_specs(8)['magnets'] == 280
