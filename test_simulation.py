@@ -1,6 +1,6 @@
 import pytest
-from roofline import RooflineAnalyzer
+from simulator import CMOSModel
 
-def test_classification():
-    analyzer = RooflineAnalyzer(memory_bandwidth_GBs=50.0)
-    assert analyzer.classify(1.0, 100e9) == 'Memory-Bound'
+def test_cmos_approx():
+    cmos = CMOSModel()
+    assert cmos.get_mac_energy_J(8) == pytest.approx(1.5e-13)
