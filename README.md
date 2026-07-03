@@ -1,4 +1,4 @@
 # Magellan-NML
 
-### Running instructions
-`python3 main.py` to run the model.
+### Sensitivity Analysis
+Clock scales 2x (100MHz to 200MHz).
