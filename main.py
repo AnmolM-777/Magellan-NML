@@ -1,2 +1,2 @@
-def format_table(headers, rows):
-    pass
+if __name__ == '__main__':
+    print('=== Magellan NML Pipeline ===')
