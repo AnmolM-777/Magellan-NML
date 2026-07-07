@@ -1,2 +1,3 @@
-if __name__ == '__main__':
-    print('-------------------------')
+def write_report():
+    with open('report.md', 'w') as f:
+        f.write('# Report')
