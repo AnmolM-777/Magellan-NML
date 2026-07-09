@@ -1,4 +1,4 @@
 # Magellan-NML
 
-### Key Architectural Insights
-- Memory wall governs overall performance.
+### References
+1. S. Sivasubramani et al., Nano Express 2021.
