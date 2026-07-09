@@ -1,4 +1,3 @@
 # Magellan-NML
 
-### References
-1. S. Sivasubramani et al., Nano Express 2021.
+$$E_{mac} = M * \alpha * E_{switch}$$
