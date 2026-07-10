@@ -9,3 +9,21 @@ class WorkloadMapper:
         self.mem_energy_J_per_byte = mem_energy_pJ_per_byte * 1e-12
         self.sram_cache_size_bytes = sram_cache_size_bytes
         self.sram_energy_J_per_byte = sram_energy_pJ_per_byte * 1e-12
+
+    def map_workload(self, profiled_layers, bit_width=8):
+        results = []
+        for l in profiled_layers:
+            macs = l["macs"]
+            mem = l["total_memory_bytes"]
+            if mem <= self.sram_cache_size_bytes:
+                cache_status = "HIT (SRAM)"
+                mem_energy = mem * self.sram_energy_J_per_byte
+            else:
+                cache_status = "MISS (DRAM)"
+                mem_energy = mem * self.mem_energy_J_per_byte
+            results.append({
+                "layer_id": l["layer_id"],
+                "cache_status": cache_status,
+                "mem_energy_J": mem_energy
+            })
+        return results
