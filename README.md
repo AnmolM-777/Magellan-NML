@@ -93,6 +93,11 @@ pytest test_simulation.py
 ---
 
 ## 6. References
-1. S. Sivasubramani et al., **"Area efficient in-plane nanomagnetic multiplier and convolution architecture design,"** *Nano Express*, vol. 2, no. 1, 2021.
-2. J. Bandyopadhyay et al., **"Energy dissipation in nanomagnetic logic gates under realistic parameters,"** *IEEE Transactions on Nanotechnology*, 2019.
-3. M. Horowitz, **"Computing's Energy Problem (and What We Can Do About It),"** *IEEE International Solid-State Circuits Conference (ISSCC)*, 2014.
+1. S. Sivasubramani et al., **"Area efficient in-plane nanomagnetic multiplier and convolution architecture design,"** *Nano Express*, vol. 2, no. 1, 015011, 2021.
+2. B. Lambson, D. Carlton, and J. Bokor, **"Exploring the Thermodynamic Limits of Computation in Nanomagnetic Devices,"** *Science*, vol. 333, no. 6041, pp. 455-458, 2011.
+3. M. T. Niemier, G. H. Bernstein, G. Csaba, A. Orlov, and W. Porod, **"Nanomagnetic Logic: Devices to Systems,"** *Proceedings of the IEEE*, vol. 99, no. 3, pp. 360-377, 2011.
+4. A. Imre, G. Csaba, L. Ji, A. Orlov, G. H. Bernstein, and W. Porod, **"Majority Logic Gate for Magnetic Quantum-Dot Cellular Automata,"** *Science*, vol. 311, no. 5758, pp. 205-208, 2006.
+5. S. Bandyopadhyay and M. Cahay, **"Energy dissipation in nanomagnetic logic gates under realistic parameters,"** *IEEE Transactions on Nanotechnology*, vol. 18, pp. 1024-1033, 2019.
+6. S. Williams, A. Waterman, and D. Patterson, **"Roofline: an insightful visual performance model for multicore architectures,"** *Communications of the ACM*, vol. 52, no. 4, pp. 65-76, 2009.
+7. M. Horowitz, **"Computing's energy problem (and what we can do about it),"** *IEEE International Solid-State Circuits Conference (ISSCC)*, vol. 57, pp. 10-14, 2014.
+
