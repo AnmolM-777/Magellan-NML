@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Project Report: Magellan-NML</title>
+    <style>
+        body {
+            font-family: "Georgia", serif;
+            line-height: 1.6;
+            color: #222;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #fdfdfd;
+        }
+        h1, h2, h3, h4 {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            color: #111;
+            font-weight: 700;
+        }
+        h1 {
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+        .subtitle {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            font-size: 1.2em;
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .author-box {
+            text-align: center;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            margin-bottom: 40px;
+            padding: 15px;
+            background: #f4f4f6;
+            border-radius: 6px;
+            border: 1px solid #e1e1e8;
+        }
+        .author-box p {
+            margin: 4px 0;
+            font-size: 0.95em;
+        }
+        .divider {
+            height: 1px;
+            background: #ddd;
+            margin: 40px 0;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 2px solid #222;
+            padding-bottom: 5px;
+            margin-top: 40px;
+        }
+        h3 {
+            font-size: 1.15em;
+            margin-top: 30px;
+            color: #0b3c5d;
+        }
+        p {
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            font-size: 0.9em;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f6;
+            font-weight: bold;
+            color: #111;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        .img-container {
+            text-align: center;
+            margin: 35px 0;
+        }
+        .img-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-radius: 4px;
+        }
+        .img-caption {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 8px;
+            font-style: italic;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+        }
+        .math {
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+            background: #f7f7f9;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        .math-block {
+            text-align: center;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 1.15em;
+            background: #f7f7f9;
+            padding: 12px;
+            margin: 20px 0;
+            border-radius: 4px;
+            border-left: 3px solid #0b3c5d;
+        }
+        .highlight-box {
+            background-color: #f0f7f4;
+            border-left: 4px solid #32936f;
+            padding: 15px;
+            margin: 25px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .highlight-box h4 {
+            margin: 0 0 8px 0;
+            color: #2b6f52;
+        }
+        .highlight-box p {
+            margin: 0;
+            font-size: 0.95em;
+        }
+        @media print {
+            body {
+                margin: 20px;
+                font-size: 11pt;
+                background-color: #fff;
+            }
+            .no-print {
+                display: none;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+            .author-box {
+                border: none;
+                background: none;
+                padding: 0;
+            }
+            table {
+                page-break-inside: avoid;
+            }
+            .img-container {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Roofline-Guided Workload Mapping of Robotic Perception onto Nanomagnetic MAC Arrays</h1>
+    <div class="subtitle">Research Project Report & Architectural Feasibility Study</div>
+
+    <div class="author-box">
+        <p><strong>Prepared by:</strong> Anmol Mishra (B.Tech CSE, IIT Jodhpur)</p>
+        <p><strong>Target Lab:</strong> INTRINSIC Lab, IIT Delhi (Prof. Santhosh Sivasubramani)</p>
+        <p><strong>Date:</strong> July 13, 2026</p>
+    </div>
+
+    <h2>1. Executive Summary</h2>
+    <p>
+        This report presents a first-of-its-kind architectural mapping and Roofline bottleneck analysis of a combined robotic perception workload (depth estimation and object detection) running on simulated nanomagnetic Majority Gate (MQCA) Multiply-Accumulate (MAC) arrays. Calibrated directly against physical layout parameters from <em>Sivasubramani et al. (Nano Express 2021)</em>, the framework implements device-level physics models (including thermodynamics, thermal stability error rates, and cell area scaling) alongside system-level features (including a local 2MB SRAM scratchpad cache and a heterogeneous scheduler).
+    </p>
+    <div class="highlight-box">
+        <h4>Key Results:</h4>
+        <p>
+            The hybrid co-processor architecture achieves an overall <strong>5.03x system-wide energy reduction</strong> compared to a standard 28nm CMOS reference. Furthermore, by introducing local SRAM scratchpads, we achieve a <strong>82.6% cache hit rate</strong> across the pipeline, offloading 82.6% of operations to the ultra-low-power MQCA co-processor while scheduling capacity spills to CMOS. The nanomagnetic core array achieves a <strong>23.8x layout density improvement</strong> compared to CMOS with a block error rate bounded within <span class="math">6.85 \times 10^{-10}</span> at 300K.
+        </p>
+    </div>
+
+    <h2>2. Physical & Device-Level Modeling</h2>
+    <p>
+        Nanomagnetic Logic (NML) operates by dipole-coupling magnetization orientations of single-domain ferromagnets rather than charge-current propagation. The MQCA primitives are modeled according to the following physics criteria:
+    </p>
+    
+    <h3>A. Thermodynamic Energy Limits</h3>
+    <p>
+        The simulator implements the Landauer limit for minimum switching dissipation, where the energy <span class="math">E_{switch}</span> per magnet switch is bounded by:
+    </p>
+    <div class="math-block">
+        E_{switch} \ge k_B \cdot T \cdot \ln(2)
+    </div>
+    <p>
+        At <span class="math">T = 300\text{ K}</span>, this thermodynamic minimum is <span class="math">2.87 \times 10^{-21}\text{ J}</span> (or <span class="math">0.00287\text{ aJ}</span>). Under baseline parameters, the cell energy is set at <span class="math">2.0\text{ aJ}</span>, which operates comfortably above this physical floor.
+    </p>
+
+    <h3>B. Thermal Stability & Switch Error Rates</h3>
+    <p>
+        Nanomagnetic cells rely on magnetocrystalline and shape anisotropy energy <span class="math">E_b = K_u \cdot V</span> (where <span class="math">K_u</span> is the uniaxial anisotropy constant and <span class="math">V</span> is the volume) to withstand thermal fluctuations. The single-magnet switching error probability is:
+    </p>
+    <div class="math-block">
+        P_{error} = \exp\left(-\frac{K_u \cdot V}{k_B \cdot T}\right)
+    </div>
+    <p>
+        For a magnet cell of size <span class="math">20\text{nm} \times 30\text{nm} \times 5\text{nm}</span> and anisotropy <span class="math">K_u = 4.0 \times 10^4\text{ J/m}^3</span>, the thermal stability barrier is <span class="math">\Delta \approx 29</span>, yielding a magnet error rate of <span class="math">2.48 \times 10^{-13}</span>. Over a complete INT8 MAC block (2620 magnets), the block-level switching error rate is calculated as <span class="math">6.85 \times 10^{-10}</span>.
+    </p>
+
+    <h3>C. Layout Area Density Scaling</h3>
+    <p>
+        By assuming a standard MQCA cell layout pitch of <span class="math">40\text{nm} \times 40\text{nm}</span> (including boundaries), a single cell occupies <span class="math">0.0016\text{ }\mu\text{m}^2</span>. An INT8 MAC unit occupies only <span class="math">4.192\text{ }\mu\text{m}^2</span>, which represents a massive layout compaction over the equivalent 28nm CMOS MAC footprint (~100 <span class="math">\mu\text{m}^2</span>).
+    </p>
+
+    <div class="page-break"></div>
+
+    <h2>3. Workload Profiling & Quantization Pareto Frontiers</h2>
+    <p>
+        The mapped perception workload consists of 23 layers from a dual-task pipeline: <strong>MiDaS</strong> (monocular depth) and <strong>YOLOv8-nano</strong> (detection). We analyzed the accuracy degradation vs. quantization bit-width to establish Pareto boundaries:
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Quantization</th>
+                <th>Task Metric</th>
+                <th>Metric Value</th>
+                <th>Evaluation Quality</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>YOLOv8-nano</td>
+                <td>FP32 / FP16</td>
+                <td>mAP50-95</td>
+                <td>0.373</td>
+                <td>Excellent (Baseline)</td>
+            </tr>
+            <tr>
+                <td>YOLOv8-nano</td>
+                <td>INT8</td>
+                <td>mAP50-95</td>
+                <td>0.365</td>
+                <td>Very Good (Recommended)</td>
+            </tr>
+            <tr>
+                <td>YOLOv8-nano</td>
+                <td>INT4</td>
+                <td>mAP50-95</td>
+                <td>0.282</td>
+                <td>Degraded</td>
+            </tr>
+            <tr>
+                <td>MiDaS Depth</td>
+                <td>FP32 / FP16</td>
+                <td>RMSE (meters)</td>
+                <td>0.082m</td>
+                <td>Excellent (Baseline)</td>
+            </tr>
+            <tr>
+                <td>MiDaS Depth</td>
+                <td>INT8</td>
+                <td>RMSE (meters)</td>
+                <td>0.091m</td>
+                <td>Good (Recommended)</td>
+            </tr>
+            <tr>
+                <td>MiDaS Depth</td>
+                <td>INT4</td>
+                <td>RMSE (meters)</td>
+                <td>0.165m</td>
+                <td>Poor</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>4. Cache-Aware Memory Mapping & Scheduling</h2>
+    <p>
+        To bypass the expensive off-chip memory wall, the simulator features a local <strong>2MB SRAM scratchpad buffer</strong>. Hit/miss status is evaluated dynamically: cache hits bypass DRAM (20 pJ/B) and utilize local scratchpad reads (1 pJ/B). 
+        The heterogeneous scheduler offloads a layer to the NML array only if:
+        (1) the compute energy savings exceeds 4x, and 
+        (2) the layer fits in local SRAM (avoiding DRAM latency penalties).
+        Layers failing this criteria run on the high-frequency CMOS baseline.
+    </p>
+    <p>
+        Out of the 23 layers, <strong>82.6% (19 layers)</strong> resulted in cache hits and were offloaded to the NML co-processor, yielding a workload-wide pipeline energy of <strong>291.27 uJ</strong> compared to <strong>1463.76 uJ</strong> for CMOS, representing a <strong>5.03x savings</strong>.
+    </p>
+
+    <div class="page-break"></div>
+
+    <h2>5. Roofline & Performance Visualization</h2>
+    <p>
+        We plotted the attainable performance (in GMACs/s) against arithmetic intensity (in MACs/Byte) across three separate memory interfaces: LPDDR5 (42.6 GB/s), DDR5 (51.2 GB/s), and HBM3 (819.2 GB/s).
+    </p>
+
+    <div class="img-container">
+        <img src="plots/roofline_model.png" alt="Multi-Memory Roofline Plot">
+        <div class="img-caption">Figure 1: Roofline Model boundaries for LPDDR5, DDR5, and HBM3 compared against NML baseline and sensitivity ceilings. Because NML runs at a low frequency, the compute ceiling is low, shifting all perception layers into the compute-bound flat-roof region.</div>
+    </div>
+
+    <div class="img-container">
+        <img src="plots/energy_comparison.png" alt="Energy Comparison Chart">
+        <div class="img-caption">Figure 2: Cache-aware layer-by-layer total energy comparison between 28nm CMOS and MQCA NML. Hits in local 2MB scratchpad drastically drop the energy wall for NML.</div>
+    </div>
+
+    <h2>6. Key Scientific Conclusions</h2>
+    <ol>
+        <li><strong>Redefining the Memory Wall:</strong> In high-frequency CMOS accelerators, memory bandwidth is the primary bottleneck. However, on NML arrays operating at 100–200 MHz, the low compute ceiling shifts the bottleneck—almost all vision layers remain compute-bound, making high-performance memory interfaces like HBM3 less critical than on CMOS.</li>
+        <li><strong>SRAM Buffers are Essential:</strong> Without on-chip caches, the off-chip DRAM energy (20 pJ/B) completely negates NML's attojoule compute efficiency. SRAM caching increases pipeline savings to 5.03x.</li>
+        <li><strong>Area Compaction:</strong> NML co-processors occupy a fraction of standard CMOS layouts, allowing massive spatial parallelization in miniature robotic platforms.</li>
+    </ol>
+
+    <h2>7. References</h2>
+    <ol>
+        <li>S. Sivasubramani et al., "Area efficient in-plane nanomagnetic multiplier and convolution architecture design," <em>Nano Express</em>, vol. 2, no. 1, 2021.</li>
+        <li>J. Bandyopadhyay et al., "Energy dissipation in nanomagnetic logic gates under realistic parameters," <em>IEEE Transactions on Nanotechnology</em>, 2019.</li>
+        <li>M. Horowitz, "Computing's Energy Problem (and What We Can Do About It)," <em>IEEE ISSCC</em>, 2014.</li>
+    </ol>
+
+</body>
+</html>
